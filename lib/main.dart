@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_coachingcenter/myclasses.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,7 +11,23 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MyBottomNavigation(),
+    );
+  }
+}
+class MyBottomNavigation extends StatefulWidget {
+  @override
+  _MyBottomNavigationState createState() => _MyBottomNavigationState();
+}
+
+class _MyBottomNavigationState extends State<MyBottomNavigation> {
   int _currentIndex =0;
+  List<Widget> _children;
   String activeImages="";
   Color color=Colors.white;
   List<Color>colors=[Colors.black,Colors.red,Colors.yellow];
@@ -19,147 +36,144 @@ class _MyAppState extends State<MyApp> {
   List<String> upcomingimages=["img/guitor.jpg","img/music.jpg",];
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: SafeArea(
-          child: Container(
-            color: Color(0xFFf9f9f9),
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: 15,),
-                  Container(
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          color: Color(0xFFf9f9f9),
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: 15,),
+                Container(
                     alignment: Alignment.centerLeft,
-                      child: Text("Hi, Alina!",style: TextStyle(color: Color(0xFF414141),fontSize: 18,fontWeight: FontWeight.w800),)),
-                  SizedBox(height: 25,),
-                  Container(
-                    height:44,
-                    child:TextField(
-                      decoration: InputDecoration(
-                       filled: true,
-                       fillColor: Colors.white,
-                       prefixIcon: Icon(Icons.search,size: 25,color: Color(0xFFb1b3b2),),
-                       hintText: "Music",
-                       hintStyle: TextStyle(color: Color(0xFFccccce),
-                        fontSize: 15),
+                    child: Text("Hi, Alina!",style: TextStyle(color: Color(0xFF414141),fontSize: 18,fontWeight: FontWeight.w800),)),
+                SizedBox(height: 25,),
+                Container(
+                  height:44,
+                  child:TextField(
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      prefixIcon: Icon(Icons.search,size: 25,color: Color(0xFFb1b3b2),),
+                      hintText: "Music",
+                      hintStyle: TextStyle(color: Color(0xFFccccce),
+                          fontSize: 15),
 
-                        enabledBorder: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
 
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(
 
-                            color: Colors.white
-                        )
+                              color: Colors.white
+                          )
+                      ),
                     ),
                   ),
                 ),
-              ),
-                  SizedBox(height: 25,),
-                  Stack(
-                    children: [
-                      Container(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.asset("img/mike.jpg"),
+                SizedBox(height: 25,),
+                Stack(
+                  children: [
+                    Container(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset("img/mike.jpg"),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top:45.0,left: 25,right: 95),
+                      child: Text("Why You Should Choose Dragon Couch?",style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w700),),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top:100.0,left: 25),
+                      child: Text("There are many good teachers",style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w500),),
+                    )
+                  ],
+                ),
+                SizedBox(height: 25,),
+                Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text("Features",style: TextStyle(color: Color(0xFF8f9092),fontSize: 18,fontWeight: FontWeight.w800),)
+                ),
+                SizedBox(height: 12,),
+                Container(
+                  height: 100,
+                  child: ListView.builder(
+                    itemCount: images.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context,index){
+                      return InkWell(
+                        child: Features(
+                          onTap: (){
+                            setState(() {
+                              activeImages = images[index];
+                            });
+                          },
+                          image: images[index],
+                          imagename: imagesnames[index],
+                          activeImages: activeImages,
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top:45.0,left: 25,right: 95),
-                        child: Text("Why You Should Choose Dragon Couch?",style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w700),),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top:100.0,left: 25),
-                        child: Text("There are many good teachers",style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w500),),
-                      )
-                    ],
+                      );
+                    },
                   ),
-                  SizedBox(height: 25,),
-                  Container(
+                ),
+                SizedBox(height: 5,),
+                Container(
                     alignment: Alignment.centerLeft,
-                      child: Text("Features",style: TextStyle(color: Color(0xFF8f9092),fontSize: 18,fontWeight: FontWeight.w800),)
+                    child: Text("My Upcoming Classes",style: TextStyle(color: Color(0xFF6d6e70),fontSize: 18,fontWeight: FontWeight.w800),)
+                ),
+                SizedBox(height: 5,),
+                Container(
+                  height: 200,
+                  child: ListView.builder(
+                    itemCount: upcomingimages.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context,index){
+                      return Newclasses(
+                        images: upcomingimages[index],
+                      );
+                    },
                   ),
-                  SizedBox(height: 12,),
-                  Container(
-                    height: 100,
-                    child: ListView.builder(
-                      itemCount: images.length,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context,index){
-                        return InkWell(
-                          child: Features(
-                            onTap: (){
-                              setState(() {
-                                activeImages = images[index];
-                              });
-                            },
-                            image: images[index],
-                            imagename: imagesnames[index],
-                            activeImages: activeImages,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 5,),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                      child: Text("My Upcoming Classes",style: TextStyle(color: Color(0xFF6d6e70),fontSize: 18,fontWeight: FontWeight.w800),)
-                  ),
-                  SizedBox(height: 5,),
-                  Container(
-                    height: 200,
-                    child: ListView.builder(
-                      itemCount: upcomingimages.length,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context,index){
-                        return Newclasses(
-                          images: upcomingimages[index],
-                        );
-                      },
-                    ),
-                  ),
+                ),
 
-                ],
-              ),
+              ],
             ),
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          items: [
-            BottomNavigationBarItem(
-                icon:Icon(Icons.image,size: 25,color: Color(0xFFdedee8),),
-                label: "Messages",
-            ),
-            BottomNavigationBarItem(
-                icon:Icon(Icons.notifications,size: 25,color: Color(0xFFdedee8),),
-                label: "notifications"
-            ),
-            BottomNavigationBarItem(
-                icon:Icon(Icons.book,size: 25,color: Color(0xFFdedee8),),
-                label: "updates"
-            ),
-            BottomNavigationBarItem(
-                icon:Icon(Icons.person,size: 25,color: Color(0xFFdedee8),),
-                label: "profile"
-            ),
-
-          ],
-          onTap: (index){
-            setState((){
-              _currentIndex = index;
-            }
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(icon:IconButton(icon: Icon(Icons.home,size:28,color: Color(0xFFdddde5),),
+              onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Myclasses()));
+          },),
+            label: "home"
+          ),
+          BottomNavigationBarItem(icon:IconButton(icon: Icon(Icons.notifications,size: 28,color: Color(0xFFdddde5),), onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Myclasses()));
+          }),
+            label: "classes"
+          ),
+          BottomNavigationBarItem(icon:IconButton(icon: Icon(Icons.book,size: 28,color: Color(0xFFdddde5),), onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Myclasses()),
             );
-          },
-        ),
+          }),
+            label: "notifications"
+          ),
+          BottomNavigationBarItem(icon:IconButton(icon: Icon(Icons.person,size: 28,color: Color(0xFFdddde5),), onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Myclasses()),
+            );
+          }),
+              label: "profile"
+          )
+        ],
       ),
     );
   }
 }
+
 
 
 
