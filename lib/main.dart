@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_coachingcenter/myclasses.dart';
 
+import 'bookoptions.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -26,8 +28,6 @@ class MyBottomNavigation extends StatefulWidget {
 }
 
 class _MyBottomNavigationState extends State<MyBottomNavigation> {
-  int _currentIndex =0;
-  List<Widget> _children;
   String activeImages="";
   Color color=Colors.white;
   List<Color>colors=[Colors.black,Colors.red,Colors.yellow];
@@ -163,7 +163,7 @@ class _MyBottomNavigationState extends State<MyBottomNavigation> {
             label: "notifications"
           ),
           BottomNavigationBarItem(icon:IconButton(icon: Icon(Icons.person,size: 28,color: Color(0xFFdddde5),), onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>Myclasses()),
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Bookoptions()),
             );
           }),
               label: "profile"

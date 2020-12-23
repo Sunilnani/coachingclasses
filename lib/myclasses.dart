@@ -1,10 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_coachingcenter/bookoptions.dart';
+import 'package:flutter_coachingcenter/main.dart';
 class Myclasses extends StatefulWidget {
   @override
   _MyclassesState createState() => _MyclassesState();
 }
 
 class _MyclassesState extends State<Myclasses> {
+
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MyBottomNavigation()
+    );
+  }
+}
+class MyBottomNavigation extends StatefulWidget {
+  @override
+  _MyBottomNavigationState createState() => _MyBottomNavigationState();
+}
+
+class _MyBottomNavigationState extends State<MyBottomNavigation> {
   String monday="";
   var SundayListdata=[
     {
@@ -52,128 +70,152 @@ class _MyclassesState extends State<Myclasses> {
   List<String> dates=["25","26","27","28","29","30","31"];
   List<String> titles=["Children running 1 on 1 course","Children boxing 1 on 1 course","Children music 1 on 1 course","Children running 1 on 1 course"];
   List<String> timings=["13:00AM-14:00AM","14:00AM-15:00AM","15:00Am-16:00Am","16:00AM-17:00Am"];
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: SafeArea(
-          child: Container(
-            color: Color(0xFFffffff),
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: 15,),
-                  Text("My Classes",style: TextStyle(color: Color(0xFF3e3e3e),fontSize: 18,fontWeight: FontWeight.w800),),
-                  SizedBox(height: 20,),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                          color:Color(0xFFf3f3f3),
-                          offset: const Offset(
-                            1.0,
-                            5.0,
-                          ),
-                          blurRadius: 3.0,
-                          spreadRadius: 2.0,
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          color: Color(0xFFffffff),
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: 15,),
+                Text("My Classes",style: TextStyle(color: Color(0xFF3e3e3e),fontSize: 18,fontWeight: FontWeight.w800),),
+                SizedBox(height: 20,),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                        color:Color(0xFFf3f3f3),
+                        offset: const Offset(
+                          1.0,
+                          5.0,
                         ),
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          alignment: Alignment.center,
-                          height: 40,
-                          width:MediaQuery.of(context).size.width*0.3,
-                          color: Color(0xFF48a77d),
-                          child: Text("List",style: TextStyle(color: Colors.white,fontSize: 15),),
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          height: 40,
-                          width:MediaQuery.of(context).size.width*0.29,
-                          color: Colors.white,
-                          child: Text("week",style: TextStyle(color: Colors.black,fontSize: 15),),
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          height: 40,
-                          width:MediaQuery.of(context).size.width*0.29,
-                          color: Colors.white,
-                          child: Text("Month",style: TextStyle(color: Colors.black,fontSize: 15),),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 15,),
-                  Row(
-                    children: [
-                      Text("25",style: TextStyle(color: Color(0xFF696a6b),fontSize: 32,fontWeight: FontWeight.w700),),
-                      SizedBox(width: 3,),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Fri",style: TextStyle(color: Colors.black12),),
-                          Text("Sep2020",style: TextStyle(color: Colors.black12),)
-                        ],
+                        blurRadius: 3.0,
+                        spreadRadius: 2.0,
                       ),
                     ],
                   ),
-                  SizedBox(height: 15,),
-                  Container(
-                    height: 50,
-                    child: ListView.builder(
-                      itemCount: dates.length,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context,index){
-                        return InkWell(
-                          onTap: (){
-                            setState(() {
-                              Activedate= dates[index];
-                              monday=mondaylists[index]["title"];
-                            });
-                          },
-                          child: Days(
-                            day: days[index],
-                            date: dates[index],
-                            Activedate: Activedate,
-                            monday: monday,
-                          ),
-                        );
-                      },
-                    ),
+                  child: Row(
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        height: 40,
+                        width:MediaQuery.of(context).size.width*0.3,
+                        color: Color(0xFF48a77d),
+                        child: Text("List",style: TextStyle(color: Colors.white,fontSize: 15),),
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        height: 40,
+                        width:MediaQuery.of(context).size.width*0.29,
+                        color: Colors.white,
+                        child: Text("week",style: TextStyle(color: Colors.black,fontSize: 15),),
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        height: 40,
+                        width:MediaQuery.of(context).size.width*0.29,
+                        color: Colors.white,
+                        child: Text("Month",style: TextStyle(color: Colors.black,fontSize: 15),),
+                      )
+                    ],
                   ),
-                  SizedBox(height: 20,),
-                  Container(
-                    height: 450,
-                    child: ListView.builder(
-                      itemCount: titles.length,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (context,index){
-                        return Myclass(
-                          title:titles[index],
-                          timing: timings[index],
-                          monday: mondaylists[index]["title"],
-
-                        );
-                      },
+                ),
+                SizedBox(height: 15,),
+                Row(
+                  children: [
+                    Text("25",style: TextStyle(color: Color(0xFF696a6b),fontSize: 32,fontWeight: FontWeight.w700),),
+                    SizedBox(width: 3,),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Fri",style: TextStyle(color: Colors.black12),),
+                        Text("Sep2020",style: TextStyle(color: Colors.black12),)
+                      ],
                     ),
-                  )
-                ],
-              ),
+                  ],
+                ),
+                SizedBox(height: 15,),
+                Container(
+                  height: 50,
+                  child: ListView.builder(
+                    itemCount: dates.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context,index){
+                      return InkWell(
+                        onTap: (){
+                          setState(() {
+                            Activedate= dates[index];
+                            monday=mondaylists[index]["title"];
+                          });
+                        },
+                        child: Days(
+                          day: days[index],
+                          date: dates[index],
+                          Activedate: Activedate,
+                          monday: monday,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(height: 20,),
+                Container(
+                  height: 450,
+                  child: ListView.builder(
+                    itemCount: titles.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (context,index){
+                      return Myclass(
+                        title:titles[index],
+                        timing: timings[index],
+                        monday: mondaylists[index]["title"],
+
+                      );
+                    },
+                  ),
+                )
+              ],
             ),
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(icon:IconButton(icon: Icon(Icons.home,size:28,color: Color(0xFFdddde5),),
+            onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Myclasses()));
+            },),
+              label: "home"
+          ),
+          BottomNavigationBarItem(icon:IconButton(icon: Icon(Icons.notifications,size: 28,color: Color(0xFFdddde5),), onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Myclasses()));
+          }),
+              label: "classes"
+          ),
+          BottomNavigationBarItem(icon:IconButton(icon: Icon(Icons.book,size: 28,color: Color(0xFFdddde5),), onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Bookoptions()),
+            );
+          }),
+              label: "notifications"
+          ),
+          BottomNavigationBarItem(icon:IconButton(icon: Icon(Icons.person,size: 28,color: Color(0xFFdddde5),), onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Myclasses()),
+            );
+          }),
+              label: "profile"
+          )
+        ],
+      ),
     );
   }
 }
+
 
 class Myclass extends StatefulWidget {
   const Myclass({
@@ -217,8 +259,9 @@ class _MyclassState extends State<Myclass> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 5,),
-                  Text(widget.monday,style: TextStyle(color: Colors.black,fontSize: 15,fontWeight:FontWeight.w700),),
-                  Text(widget.timing),
+                  Text(widget.monday,style: TextStyle(color: Color(0xFF7c7d7f),fontSize: 15,fontWeight:FontWeight.w700),),
+                  SizedBox(height: 5,),
+                  Text(widget.timing,style: TextStyle(color: Colors.black54),),
                   SizedBox(height: 10,),
                   Row(
                     children: [
@@ -226,7 +269,7 @@ class _MyclassState extends State<Myclass> {
                         backgroundImage: AssetImage("img/guitor.jpg"),
                         radius: 20,
                       ),
-                      SizedBox(width: 3,),
+                      SizedBox(width: 5,),
                       CircleAvatar(
                         backgroundImage: AssetImage("img/music.jpg"),
                         radius: 20,
@@ -274,10 +317,11 @@ class _DaysState extends State<Days> {
           Padding(
             padding: const EdgeInsets.only(right:7.0),
             child: Container(
-              height: 45,
+              height: 50,
               width: 40,
-              decoration: widget.Activedate != widget.date?BoxDecoration(color: Colors.grey):BoxDecoration(
-                  color:Color(0xFF48a77d)
+              decoration: widget.Activedate != widget.date?BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(3)):BoxDecoration(
+                  color:Color(0xFF48a77d),
+                borderRadius: BorderRadius.circular(3)
               ),
               child: Padding(
                 padding: const EdgeInsets.only(top:6.0),
@@ -286,6 +330,7 @@ class _DaysState extends State<Days> {
                   child: Column(
                     children: [
                       Text(widget.day,style: TextStyle(color: Colors.white),),
+                      SizedBox(height: 5,),
                       Text(widget.date,style: TextStyle(color: Colors.white),)
                     ],
                   ),
